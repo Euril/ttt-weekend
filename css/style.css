@@ -22,3 +22,11 @@ div {
   text-align: center;
   vertical-align: middle;
 }
+
+.xSq {
+  background-color: forestgreen;
+}
+
+.oSq {
+  background-color: crimson;
+}
