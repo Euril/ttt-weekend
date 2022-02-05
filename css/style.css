@@ -18,6 +18,11 @@ section.board {
   grid-gap: 0vmin;
 }
 
+button{
+  font-size: x-large;
+  margin: 20px;
+}
+
 div {
   border: 3px solid black;
   font-size: 8vmin;

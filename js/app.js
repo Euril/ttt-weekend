@@ -32,22 +32,29 @@ const messageEle = document.querySelector('#message')
 const resultEle= document.querySelector('#game-result-message')
 
 const squareEle = document.querySelectorAll('.square')
+
+const replayBtn = document.getElementById("replay-button")
 /*----------------------------- Event Listeners -----------------------------*/
+//board clicker
 for(let i=0; i< squareEle.length; i++){
   //console.log(squareEle[i].id)
 squareEle[i].addEventListener('click', handleClick)
 }  
+//replay button
+replayBtn.addEventListener('click', init)
 
 /*-------------------------------- Functions --------------------------------*/
 init()
 
 function init(){
-boardArray = [-1, 1, -1, 1, -1, 1, 1, -1, null]
+//maybe the default message could go in here actually...
+boardArray = [null, null, null, null, null, null, null, null, null]
 turn = 1
 winner = null
-render()
+render() //not sure where to put render ⚠️
 
 }
+
 function render(){
   boardArray.forEach(function(square, index){
     //squareEle[index] = boardArray[index]
@@ -67,7 +74,8 @@ function render(){
 }
 
 function renderMessage(){
-  messageEle.textContent= `${turn} turn`
+  
+  //messageEle.textContent= `${turn} turn`
   if(winner === null){
     messageEle.textContent = `${turn}'s turn`
   }else if(winner === 'T'){
@@ -89,27 +97,32 @@ if(evt.target.innerHTML !== "" || winner !== null){
   render() //not sure if this is where i call render but had to update
   renderMessage()
   getWinner()
+  console.log(boardArray)
+  console.log(winner)
   }
 }
 
 function getWinner(){
   let total = 0
-  let winVar //easy way to find board value at index of winning combo, due to bloody scope
+  let winVar //stores the winner variable to the board's value at the index specified by the first index of that winning combination's array...yea 
+
   areYouWinCombos.forEach(function(combo){
     combo.forEach(function(idx){
       total += boardArray[idx]
-      winVar = boardArray[0]
+      
     })
     total = Math.abs(total)
     if(total === 3){
-      winner = winVar
-      console.log(winner)  
+      winVar = boardArray[combo[0]]
+      winner = boardArray[combo[0]] 
     }
-    if(boardArray.some((element)=> null) === false){
-      winner = 'T'
-    }
+     if(boardArray.some((element)=> element === null) === false){
+       winner = 'T'
+    //   //console.log(winner)
+     }
+    
     
     total = 0 //resets the total to 0 after each win combo 
-    console.log("break")
+    console.log("break")//sanity check for run through of tihs foreach at combo
   })
 }
