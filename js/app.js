@@ -25,21 +25,15 @@ const resultEle= document.querySelector('#game-result-message')
 const squareEle = document.querySelectorAll('.square')
 /*----------------------------- Event Listeners -----------------------------*/
 for(let i=0; i< squareEle.length; i++){
-  squareEle[i].addEventListener('click', handleClick){
-  }
-    
-    //temp if condidtion just want to make sure if works
-    //maybe we can set 'value' of text content to 1 or -1 than in the render loop through the array and render X or O depending on value?
-    //5
-    
-  
-}
+  //console.log(squareEle[i].id)
+squareEle[i].addEventListener('click', handleClick)
+}  
 
 /*-------------------------------- Functions --------------------------------*/
 init()
 
 function init(){
-boardArray = [null, null, null, null, null, null, null, null, null]
+boardArray = [-1, null, null, null, null, null, null, null, null]
 turn = 1
 winner = null
 render()
@@ -58,14 +52,15 @@ function render(){
     if(boardArray[index] === null){
       squareEle[index].textContent = ""
     }
+    
   })
-  render.renderMessage
+  
 }
 
 function renderMessage(){
   messageEle.textContent= `${turn} turn`
   if(winner === null){
-    messageEle.textContent = `${turn} turn`
+    messageEle.textContent = `${turn}'s turn`
   }else if(winner === 'T'){
   messageEle.textContent = `Game ended in a tie`
   }else{
@@ -73,6 +68,17 @@ function renderMessage(){
   }
   }
 
-function handleClick(){
-  
+function handleClick(evt){
+let index = evt.target.id //index is a string
+let splitIndex = index.split("")
+index = parseInt(splitIndex.splice(-1))//index is a number
+if(evt.target.innerHTML !== "" || winner !== null){
+  return
+}else{
+  boardArray[index]=turn
+  turn = turn * -1
+  render() //not sure if this is where i call render but had to update
+  renderMessage()
+}
+
 }
