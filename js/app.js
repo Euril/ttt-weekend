@@ -48,6 +48,7 @@ init()
 
 function init(){
 //maybe the default message could go in here actually...
+messageEle.textContent = `Default Message`
 boardArray = [null, null, null, null, null, null, null, null, null]
 turn = 1
 winner = null
@@ -68,7 +69,7 @@ function render(){
     if(boardArray[index] === null){
       squareEle[index].textContent = ""
     }
-    
+
   })
   
 }
@@ -77,11 +78,11 @@ function renderMessage(){
   
   //messageEle.textContent= `${turn} turn`
   if(winner === null){
-    messageEle.textContent = `${turn}'s turn`
+    messageEle.textContent = `${turn === 1 ? 'X' : 'O'}'s turn`
   }else if(winner === 'T'){
   messageEle.textContent = `Game ended in a tie`
   }else{
-  messageEle.textContent = `${turn} is the winner`
+  messageEle.textContent = `${winner === 1 ? 'X' : 'O'} is the winner`
   }
   }
 
@@ -95,8 +96,9 @@ if(evt.target.innerHTML !== "" || winner !== null){
   boardArray[index]=turn
   turn = turn * -1
   render() //not sure if this is where i call render but had to update
-  renderMessage()
+  
   getWinner()
+  renderMessage()
   console.log(boardArray)
   console.log(winner)
   }
