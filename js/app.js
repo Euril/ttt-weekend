@@ -80,9 +80,10 @@ function renderMessage(){
   if(winner === null){
     messageEle.textContent = `${turn === 1 ? 'X' : 'O'}'s turn`
   }else if(winner === 'T'){
-  messageEle.textContent = `Game ended in a tie`
+  messageEle.textContent = `Game ended in a Tie`
   }else{
   messageEle.textContent = `${winner === 1 ? 'X' : 'O'} is the winner`
+  confetti.start(2000)
   }
   }
 

@@ -19,8 +19,16 @@ section.board {
 }
 
 button{
-  font-size: x-large;
+  background-color:steelblue;
+  font-size:20px;
+  padding: 10px 24px;
+  border-radius: 10px;
   margin: 20px;
+  transition-duration: 0.2s;
+}
+button:hover{
+  background-color:red;
+  color:white;
 }
 
 div {
