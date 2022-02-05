@@ -42,7 +42,7 @@ squareEle[i].addEventListener('click', handleClick)
 init()
 
 function init(){
-boardArray = [1, 1, 1, 1, -1, 1, 1, -1, null]
+boardArray = [-1, 1, -1, 1, -1, 1, 1, -1, null]
 turn = 1
 winner = null
 render()
@@ -94,17 +94,22 @@ if(evt.target.innerHTML !== "" || winner !== null){
 
 function getWinner(){
   let total = 0
+  let winVar //easy way to find board value at index of winning combo, due to bloody scope
   areYouWinCombos.forEach(function(combo){
     combo.forEach(function(idx){
       total += boardArray[idx]
+      winVar = boardArray[0]
     })
-    console.log(Math.abs(total))
-    total = 0
+    total = Math.abs(total)
+    if(total === 3){
+      winner = winVar
+      console.log(winner)  
+    }
+    if(boardArray.some((element)=> null) === false){
+      winner = 'T'
+    }
+    
+    total = 0 //resets the total to 0 after each win combo 
     console.log("break")
   })
 }
-    
-    
-    
-
-const reducer = (previousValue, currentValue) => previousValue + currentValue
