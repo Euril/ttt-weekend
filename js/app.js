@@ -10,6 +10,15 @@ const winningCombos = [
   combo8 = [sq6,sq4,sq2],
 ]
 
+const winCombos = [
+  [sq0,sq1,sq2], [sq0,sq3,sq6], [sq0,sq4,sq8], [sq1,sq4,sq7],
+  [sq2,sq5,sq8], [sq3,sq4,sq5], [sq6,sq7,sq8], [sq6,sq4,sq2]
+]
+const areYouWinCombos = [
+  [0,1,2], [0,3,6], [0,4,8], [1,4,7],
+  [2,5,8], [3,4,5], [6,7,8], [6,4,2]
+]
+
 /*---------------------------- Variables (state) ----------------------------*/
 let boardArray
 let turn
@@ -33,7 +42,7 @@ squareEle[i].addEventListener('click', handleClick)
 init()
 
 function init(){
-boardArray = [-1, null, null, null, null, null, null, null, null]
+boardArray = [1, 1, 1, 1, -1, 1, 1, -1, null]
 turn = 1
 winner = null
 render()
@@ -79,6 +88,23 @@ if(evt.target.innerHTML !== "" || winner !== null){
   turn = turn * -1
   render() //not sure if this is where i call render but had to update
   renderMessage()
+  getWinner()
+  }
 }
 
+function getWinner(){
+  let total = 0
+  areYouWinCombos.forEach(function(combo){
+    combo.forEach(function(idx){
+      total += boardArray[idx]
+    })
+    console.log(Math.abs(total))
+    total = 0
+    console.log("break")
+  })
 }
+    
+    
+    
+
+const reducer = (previousValue, currentValue) => previousValue + currentValue
