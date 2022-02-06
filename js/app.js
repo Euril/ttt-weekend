@@ -47,13 +47,13 @@ replayBtn.addEventListener('click', init)
 init()
 
 function init(){
-//maybe the default message could go in here actually...
-messageEle.textContent = `Default Message`
+messageEle.textContent = `-`//not sure what to put for a default message...
 boardArray = [null, null, null, null, null, null, null, null, null]
 turn = 1
 winner = null
 render() //not sure where to put render ⚠️
-
+console.log(squareEle)
+console.log(boardArray)
 }
 
 function render(){
@@ -88,7 +88,7 @@ function renderMessage(){
   }
 
 function handleClick(evt){
-let index = evt.target.id //index is a string
+let index = evt.target.id //index is a string, the sq#
 let splitIndex = index.split("")
 index = parseInt(splitIndex.splice(-1))//index is a number
 if(evt.target.innerHTML !== "" || winner !== null){
@@ -96,12 +96,12 @@ if(evt.target.innerHTML !== "" || winner !== null){
 }else{
   boardArray[index]=turn
   turn = turn * -1
-  render() //not sure if this is where i call render but had to update
+  render()
   
   getWinner()
   renderMessage()
-  console.log(boardArray)
-  console.log(winner)
+  //console.log(boardArray)
+  //console.log(winner)
   }
 }
 
@@ -116,16 +116,17 @@ function getWinner(){
     })
     total = Math.abs(total)
     if(total === 3){
-      winVar = boardArray[combo[0]]
+      //winVar = boardArray[combo[0]]
       winner = boardArray[combo[0]] 
+      //has to be an else if other wise the 9th turn would get screwed
     }
-     if(boardArray.some((element)=> element === null) === false){
-       winner = 'T'
-    //   //console.log(winner)
-     }
+    // if(boardArray.some((element)=> element === null) === false){
+    //   winner = 'T'
+    // //   //console.log(winner)
+    // }
     
     
     total = 0 //resets the total to 0 after each win combo 
-    console.log("break")//sanity check for run through of tihs foreach at combo
+    //console.log("break")//sanity check for run through of this foreach at combo
   })
 }
