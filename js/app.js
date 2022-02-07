@@ -52,8 +52,8 @@ boardArray = [null, null, null, null, null, null, null, null, null]
 turn = 1
 winner = null
 render() //not sure where to put render ⚠️
-console.log(squareEle)
-console.log(boardArray)
+//console.log(squareEle)
+//console.log(boardArray)
 }
 
 function render(){
@@ -75,14 +75,14 @@ function render(){
 }
 
 function renderMessage(){
-  
+  console.log(boardArray)
   //messageEle.textContent= `${turn} turn`
   if(winner === null){
-    messageEle.textContent = `${turn === 1 ? 'X' : 'O'}'s turn`
+    messageEle.textContent = `${turn === 1 ? 'X' : '0'}'s turn`
   }else if(winner === 'T'){
   messageEle.textContent = `Game ended in a Tie`
   }else{
-  messageEle.textContent = `${winner === 1 ? 'X' : 'O'} is the winner`
+  messageEle.textContent = `${winner === 1 ? 'X' : '0'} is the winner`
   confetti.start(2000)
   }
   }
@@ -118,15 +118,17 @@ function getWinner(){
     if(total === 3){
       //winVar = boardArray[combo[0]]
       winner = boardArray[combo[0]] 
-      //has to be an else if other wise the 9th turn would get screwed
     }
-    // if(boardArray.some((element)=> element === null) === false){
-    //   winner = 'T'
-    // //   //console.log(winner)
-    // }
+    if(boardArray.some((element)=> element === null) === false && winner === null){
+      winner = 'T'
+    }
+    
     
     
     total = 0 //resets the total to 0 after each win combo 
     //console.log("break")//sanity check for run through of this foreach at combo
   })
+
+    console.log(winner)
+    
 }
