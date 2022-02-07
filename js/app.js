@@ -1,19 +1,19 @@
 /*-------------------------------- Constants --------------------------------*/
-const winningCombos = [
-  combo1 = [sq0,sq1,sq2],
-  combo2 = [sq0,sq3,sq6],
-  combo3 = [sq0,sq4,sq8],
-  combo4 = [sq1,sq4,sq7],
-  combo5 = [sq2,sq5,sq8],
-  combo6 = [sq3,sq4,sq5],
-  combo7 = [sq6,sq7,sq8],
-  combo8 = [sq6,sq4,sq2],
-]
+// const winningCombos = [
+//   combo1 = [sq0,sq1,sq2],
+//   combo2 = [sq0,sq3,sq6],
+//   combo3 = [sq0,sq4,sq8],
+//   combo4 = [sq1,sq4,sq7],
+//   combo5 = [sq2,sq5,sq8],
+//   combo6 = [sq3,sq4,sq5],
+//   combo7 = [sq6,sq7,sq8],
+//   combo8 = [sq6,sq4,sq2],
+// ] redundant I think
 
-const winCombos = [
-  [sq0,sq1,sq2], [sq0,sq3,sq6], [sq0,sq4,sq8], [sq1,sq4,sq7],
-  [sq2,sq5,sq8], [sq3,sq4,sq5], [sq6,sq7,sq8], [sq6,sq4,sq2]
-]
+// const winCombos = [
+//   [sq0,sq1,sq2], [sq0,sq3,sq6], [sq0,sq4,sq8], [sq1,sq4,sq7],
+//   [sq2,sq5,sq8], [sq3,sq4,sq5], [sq6,sq7,sq8], [sq6,sq4,sq2]
+// ] redundant I think
 const areYouWinCombos = [
   [0,1,2], [0,3,6], [0,4,8], [1,4,7],
   [2,5,8], [3,4,5], [6,7,8], [6,4,2]
@@ -29,7 +29,7 @@ const boardArrayEle = document.querySelector('section')
 
 const messageEle = document.querySelector('#message')
 
-const resultEle= document.querySelector('#game-result-message')
+//const resultEle= document.querySelector('#game-result-message')
 
 const squareEle = document.querySelectorAll('.square')
 
@@ -51,7 +51,7 @@ messageEle.textContent = `-`//not sure what to put for a default message...
 boardArray = [null, null, null, null, null, null, null, null, null]
 turn = 1
 winner = null
-render() //not sure where to put render ⚠️
+render() //render here to show an empty board during replays
 //console.log(squareEle)
 //console.log(boardArray)
 }
@@ -75,14 +75,14 @@ function render(){
 }
 
 function renderMessage(){
-  console.log(boardArray)
+  //console.log(boardArray)
   //messageEle.textContent= `${turn} turn`
   if(winner === null){
-    messageEle.textContent = `${turn === 1 ? 'X' : '0'}'s turn`
+    messageEle.textContent = `${turn === 1 ? 'X' : 'O'}'s turn`
   }else if(winner === 'T'){
   messageEle.textContent = `Game ended in a Tie`
   }else{
-  messageEle.textContent = `${winner === 1 ? 'X' : '0'} is the winner`
+  messageEle.textContent = `${winner === 1 ? 'X' : 'O'} is the winner`
   confetti.start(2000)
   }
   }
@@ -95,13 +95,11 @@ if(evt.target.innerHTML !== "" || winner !== null){
   return
 }else{
   boardArray[index]=turn
-  turn = turn * -1
+  turn = turn * -1 //alternates turn between x(1) and o(-1)
   render()
   
   getWinner()
   renderMessage()
-  //console.log(boardArray)
-  //console.log(winner)
   }
 }
 
@@ -123,12 +121,10 @@ function getWinner(){
       winner = 'T'
     }
     
-    
-    
-    total = 0 //resets the total to 0 after each win combo 
+    total = 0 //resets the total to 0 after each win combo check
     //console.log("break")//sanity check for run through of this foreach at combo
   })
 
-    console.log(winner)
+    //console.log(winner)
     
 }
